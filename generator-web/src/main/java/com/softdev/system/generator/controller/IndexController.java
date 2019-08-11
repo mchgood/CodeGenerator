@@ -37,8 +37,8 @@ public class IndexController {
     @ResponseBody
     public ReturnT<Map<String, String>> codeGenerate(String tableSql,
                                                      //2019-2-10 liutf 修改为@RequestParam参数校验
-                                                     @RequestParam(required = false, defaultValue = "大狼狗") String authorName,
-                                                     @RequestParam(required = false, defaultValue = "com.softdev.system")String packageName,
+                                                     @RequestParam(required = false, defaultValue = "三维") String authorName,
+                                                     @RequestParam(required = false, defaultValue = "com.sunwayworld.lims4")String packageName,
                                                      @RequestParam(required = false, defaultValue = "ApiReturnUtil")String returnUtil
     ) {
 
@@ -57,15 +57,10 @@ public class IndexController {
             params.put("classInfo", classInfo);
             params.put("authorName", authorName);
             params.put("packageName", packageName);
-            params.put("returnUtil", returnUtil);
 
             // result
             Map<String, String> result = new HashMap<String, String>();
 
-            //UI
-            result.put("swagger-ui", freemarkerTool.processString("code-generator/ui/swagger-ui.ftl", params));
-            result.put("element-ui", freemarkerTool.processString("code-generator/ui/element-ui.ftl", params));
-            result.put("bootstrap-ui", freemarkerTool.processString("code-generator/ui/bootstrap-ui.ftl", params));
             //mybatis old
             result.put("controller", freemarkerTool.processString("code-generator/mybatis/controller.ftl", params));
             result.put("service", freemarkerTool.processString("code-generator/mybatis/service.ftl", params));
@@ -73,21 +68,6 @@ public class IndexController {
             result.put("mapper", freemarkerTool.processString("code-generator/mybatis/mapper.ftl", params));
             result.put("mybatis", freemarkerTool.processString("code-generator/mybatis/mybatis.ftl", params));
             result.put("model", freemarkerTool.processString("code-generator/mybatis/model.ftl", params));
-            //jpa
-            result.put("entity", freemarkerTool.processString("code-generator/jpa/entity.ftl", params));
-            result.put("repository", freemarkerTool.processString("code-generator/jpa/repository.ftl", params));
-            result.put("jpacontroller", freemarkerTool.processString("code-generator/jpa/jpacontroller.ftl", params));
-            //jdbc template
-            result.put("jtdao", freemarkerTool.processString("code-generator/jdbc-template/jtdao.ftl", params));
-            result.put("jtdaoimpl", freemarkerTool.processString("code-generator/jdbc-template/jtdaoimpl.ftl", params));
-            //beetsql
-            result.put("beetlmd", freemarkerTool.processString("code-generator/beetlsql/beetlmd.ftl", params));
-            result.put("beetlentity", freemarkerTool.processString("code-generator/beetlsql/beetlentity.ftl", params));
-            result.put("beetlentitydto", freemarkerTool.processString("code-generator/beetlsql/beetlentitydto.ftl", params));
-            result.put("beetlcontroller", freemarkerTool.processString("code-generator/beetlsql/beetlcontroller.ftl", params));
-            //mybatis plus
-            result.put("pluscontroller", freemarkerTool.processString("code-generator/mybatis-plus/pluscontroller.ftl", params));
-            result.put("plusmapper", freemarkerTool.processString("code-generator/mybatis-plus/plusmapper.ftl", params));
 
             // 计算,生成代码行数
             int lineNum = 0;
@@ -104,7 +84,5 @@ public class IndexController {
             log.error(e.getMessage(), e);
             return new ReturnT<>(ReturnT.FAIL_CODE, "表结构解析失败"+e.getMessage());
         }
-
     }
-
 }

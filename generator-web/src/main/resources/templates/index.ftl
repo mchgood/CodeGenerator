@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>SQL转Java JPA、MYBATIS实现类代码生成平台</title>
-    <meta name="keywords" content="sql转实体类,sql转DAO,SQL转service,SQL转JPA实现,SQL转MYBATIS实现">
+    <title>代码生成平台</title>
+    <meta name="keywords" content="代码生成平台">
     <#import "common/common-import.ftl" as netCommon>
     <@netCommon.commonStyle />
 
@@ -62,7 +62,7 @@
                             content: "代码生成成功",
                             end: function () {
                                 codeData = data.data;
-                                genCodeArea.setValue(codeData.beetlentity);
+                                genCodeArea.setValue(codeData.model);
                                 genCodeArea.setSize('auto', 'auto');
                             }
                         });
@@ -103,40 +103,18 @@
 </script>
 </head>
 <body style="background-color: #e9ecef">
-
-    <div class="container">
-        <nav class="navbar navbar-dark bg-primary btn-lg">
-            <a class="navbar-brand" href="http://www.bejson.com">BeJSON在线工具站</a>
-            <ul class="nav navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="http://blog.csdn.net/moshowgame">大狼狗CSDN</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        <h2>Spring Boot Code Generator!</h2>
-        <p class="lead">
-            基于<code>SpringBoot2</code>+<code>Freemarker</code>的代码生成器，用<code>DDL SQL</code>语句生成<code>JPA</code>/<code>JdbcTemplate</code>/<code>Mybatis</code>/<code>MybatisPlus</code>/<code>BeetlSQL</code>相关代码，支持<code>mysql</code>/<code>oracle</code>/<code>pgsql</code>三大数据库。以<code>释放双手</code>为目的，各大模板也在陆续补充和优化。欢迎大家多多提交模板和交流想法，如果发现有SQL语句不能识别，请<a href="https://github.com/moshowgame/SpringBootCodeGenerator/issues">留言</a>给我分析，同时欢迎大家进行<a href="https://github.com/moshowgame/SpringBootCodeGenerator/pulls">PullRequest</a>和<a href="#" id="donate1">赞赏</a>，谢谢！
-        </p>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text">作者名称</span>
             </div>
-            <input type="text" class="form-control" id="authorName" name="authorName" placeholder="大狼狗">
+            <input type="text" class="form-control" id="authorName" name="authorName" placeholder="三维">
             <div class="input-group-prepend">
                 <span class="input-group-text">包名路径</span>
             </div>
-            <input type="text" class="form-control" id="packageName" name="packageName" placeholder="com.softdev.system">
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">返回封装</span>
-            </div>
-            <input type="text" class="form-control" id="returnUtil" name="returnUtil" placeholder="ApiReturnObject">
+            <input type="text" class="form-control" id="packageName" name="packageName" placeholder="com.sunwayworld.lims4">
         </div>
         <textarea id="ddlSqlArea" placeholder="请输入表结构信息..." class="form-control btn-lg" style="height: 250px;">
 CREATE TABLE `userinfo` (
@@ -150,107 +128,33 @@ CREATE TABLE `userinfo` (
         <hr>
         <!-- Example row of columns -->
         <div class="row" style="margin-top: 10px;">
-            <div class="btn-toolbar col-md-5" role="toolbar" aria-label="Toolbar with button groups">
+            <!-- 后端 -->
+            <div class="btn-toolbar col-md-7" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <div class="btn btn-secondary disabled" id="btnGroupAddon">通用实体</div>
+                        <div class="btn btn-secondary disabled" id="btnGroupAddon">后端</div>
                     </div>
                 </div>
                 <div class="btn-group" role="group" aria-label="First group">
                     <button type="button" class="btn btn-default generator" id="model">entity(set/get)</button>
-                    <button type="button" class="btn btn-default generator" id="beetlentity">entity(lombok)</button>
-                </div>
-            </div>
-            <div class="btn-toolbar col-md-7" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="btn btn-secondary disabled" id="btnGroupAddon">Mybatis</div>
-                    </div>
-                </div>
-                <div class="btn-group" role="group" aria-label="First group">
                     <button type="button" class="btn btn-default generator" id="mybatis">mybatis</button>
-                    <button type="button" class="btn btn-default generator" id="mapper">mapper</button>
                     <button type="button" class="btn btn-default generator" id="service">service</button>
                     <button type="button" class="btn btn-default generator" id="service_impl">service_impl</button>
                     <button type="button" class="btn btn-default generator" id="controller">controller</button>
                 </div>
             </div>
-        </div>
-        <!-- Example row of columns -->
-        <div class="row" style="margin-top: 10px;">
-            <div class="btn-toolbar col-md-5" role="toolbar" aria-label="Toolbar with button groups">
+            <!--前端-->
+            <div class="btn-toolbar col-md-7" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <div class="btn btn-secondary disabled" id="btnGroupAddon">MybatisPlus</div>
+                        <div class="btn btn-secondary disabled" id="btnGroupAddon">前端</div>
                     </div>
                 </div>
                 <div class="btn-group" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-default generator" id="plusmapper">mapper</button>
-                    <button type="button" class="btn btn-default generator" id="pluscontroller">controller</button>
-                </div>
-            </div>
-
-            <div class="btn-toolbar col-md-5" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="btn btn-secondary disabled" id="btnGroupAddon">UI</div>
-                    </div>
-                </div>
-                <div class="btn-group" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-default generator" id="swagger-ui">swagger-ui</button>
-                    <button type="button" class="btn btn-default generator" id="element-ui">element-ui</button>
-                    <button type="button" class="btn btn-default generator" id="bootstrap-ui">bootstrap-ui</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" style="margin-top: 10px;">
-            <div class="btn-toolbar col-md-5" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="btn btn-secondary disabled" id="btnGroupAddon">BeetlSQL</div>
-                    </div>
-                </div>
-                <div class="btn-group" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-default generator" id="beetlmd">beetlmd</button>
-                    <button type="button" class="btn btn-default generator" id="beetlcontroller">beetlcontroller</button>
-                </div>
-            </div>
-            <div class="btn-toolbar col-md-5" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="btn btn-secondary disabled" id="btnGroupAddon">JPA</div>
-                    </div>
-                </div>
-                <div class="btn-group" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-default generator" id="entity">jpa-entity</button>
-                    <button type="button" class="btn btn-default generator" id="repository">repository</button>
-                    <button type="button" class="btn btn-default generator" id="jpacontroller">controller</button>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="margin-top: 10px;">
-            <div class="btn-toolbar col-md-5" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="btn btn-secondary disabled" id="btnGroupAddon">JdbcTemplate</div>
-                    </div>
-                </div>
-                <div class="btn-group" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-default generator" id="jtdaoimpl">daoimpl</button>
-                    <button type="button" class="btn btn-default generator" id="jtdao">dao</button>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="margin-top: 10px;">
-            <div class="btn-toolbar col-md-5" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="btn btn-secondary disabled" id="btnGroupAddon">DTO</div>
-                    </div>
-                </div>
-                <div class="btn-group" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-default generator" id="beetlentitydto">entitydto(lombok+swagger)</button>
+                    <button type="button" class="btn btn-default generator" id="model">form</button>
+                    <button type="button" class="btn btn-default generator" id="mybatis">form.js</button>
+                    <button type="button" class="btn btn-default generator" id="service">grid</button>
+                    <button type="button" class="btn btn-default generator" id="service_impl">grid.js</button>
                 </div>
             </div>
         </div>
@@ -258,20 +162,5 @@ CREATE TABLE `userinfo` (
         <textarea id="genCodeArea" class="form-control btn-lg" ></textarea>
     </div>
 </div>
-
-<div class="container">
-
-    <hr>
-    <footer>
-        <footer class="bd-footer text-muted" role="contentinfo">
-            <div class="container">
-               <strong>Copyright &copy; ${.now?string('yyyy')}-2022 &nbsp;
-                   <p><a href="https://github.com/moshowgame/SpringBootCodeGenerator">SpringBootCodeGenerator</a>由<a href="https://blog.csdn.net/moshowgame" target="_blank">@Moshow/大狼狗/郑锴</a> 开发维护。 由 <a href="https://www.bejson.com">BeJson三叔 </a> 提供在线版本。点击<a href="#" id="donate2">赞赏</a>。</p>
-            </div>
-        </footer>
-    </footer>
-</div> <!-- /container -->
-
-
 </body>
 </html>
